@@ -13,6 +13,12 @@ const upload = async (req, res) => {
         return res.status(400).json({error: 'No se recibio ningun archivo'})
     }
 
+    //Si no existe la carpeta _temp, se crea automaticamente
+    const tempDir = path.join(__dirname, "..", "_temp");
+        if(!fs.existsSync(tempDir)) {
+            fs.mkdirSync(tempDir)
+        }
+
     //Asignamos la ruta del archivo temporal
     const filePath = path.join(__dirname, '..', '_temp', file.filename);
 
